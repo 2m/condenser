@@ -2,9 +2,8 @@ package lt.dvim.condenser.vdf
 
 import java.nio.file.{Files, Paths}
 
-import VdfCodec._
-import scodec.bits._
 import org.scalatest.{Matchers, WordSpec}
+import scodec.bits._
 
 class VdfCodecSpec extends WordSpec with Matchers {
   import VdfCodecSpec._
@@ -34,11 +33,7 @@ class VdfCodecSpec extends WordSpec with Matchers {
   def cycle(vdf: String) = {
     val original = vdf.vdf.bits
     val decoded = VdfCodec.codec.decode(original).require.value
-    //println(decoded)
     val encoded = VdfCodec.codec.encode(decoded).require
-    //println(encoded.bytes)
-    //println(new String(encoded.bytes.toArray))
-    //println(original.bytes)
     encoded shouldBe original
   }
 

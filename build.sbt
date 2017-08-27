@@ -7,8 +7,5 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.0.3" % Test
 )
 
-//fork in test := true
-//javaOptions in test += "-Xss1k"
-
 scalafmtOnCompile in ThisBuild := true
 scalafmtVersion in ThisBuild := "1.2.0"
