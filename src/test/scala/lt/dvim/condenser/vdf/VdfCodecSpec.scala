@@ -2,44 +2,39 @@ package lt.dvim.condenser.vdf
 
 import java.nio.file.{Files, Paths}
 
-import org.scalatest.{Matchers, WordSpec}
+import utest._
 import scodec.bits._
 
-class VdfCodecSpec extends WordSpec with Matchers {
-  import VdfCodecSpec._
+object VdfCodecSpec extends TestSuite {
 
-  "vdf codec" should {
-    Seq(
-      "amccallie-shortcuts",
-      "dave-shortcuts",
-      "empty-shortcuts",
-      "iconchange-shortcuts",
-      "issue-37-mishugashu-1-shortcuts",
-      "issue-37-mishugashu-2-shortcuts",
-      "issue-37-shortcuts",
-      "issue-37-spitfire-shortcuts",
-      "issue-37-syd-shortcuts",
-      "multitag-shortcuts",
-      "onlyilol-shortcuts",
-      "recursion_max",
-      "tag-shortcuts",
-      "windows-shortcuts",
-      "wtfis0x0d-shortcuts"
-    ).foreach { file =>
-      s"cycle $file" in cycle(file)
+  val tests = Tests {
+    "codec" - {
+      "amccallie-shortcuts" - cycle()
+      "dave-shortcuts" - cycle()
+      "empty-shortcuts" - cycle()
+      "iconchange-shortcuts" - cycle()
+      "issue-37-mishugashu-1-shortcuts" - cycle()
+      "issue-37-mishugashu-2-shortcuts" - cycle()
+      "issue-37-shortcuts" - cycle()
+      "issue-37-spitfire-shortcuts" - cycle()
+      "issue-37-syd-shortcuts" - cycle()
+      "multitag-shortcuts" - cycle()
+      "onlyilol-shortcuts" - cycle()
+      "recursion_max" - cycle()
+      "tag-shortcuts" - cycle()
+      "windows-shortcuts" - cycle()
+      "wtfis0x0d-shortcuts" - cycle()
     }
   }
 
-  def cycle(vdf: String) = {
+  def cycle()(implicit path: framework.TestPath) = {
+    val vdf = path.value.last
     val original = vdf.vdf.bits
     val decoded = VdfCodec.codec.decode(original).require.value
     val encoded = VdfCodec.codec.encode(decoded).require
-    encoded shouldBe original
+    encoded ==> original
   }
 
-}
-
-object VdfCodecSpec {
   implicit class StringOps(name: String) {
     def vdf =
       ByteVector(Files.readAllBytes(Paths.get(getClass.getResource(s"/vdf/$name.vdf").toURI)))
