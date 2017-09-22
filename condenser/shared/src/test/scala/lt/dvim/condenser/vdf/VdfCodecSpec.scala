@@ -37,6 +37,6 @@ object VdfCodecSpec extends TestSuite {
 
   implicit class StringOps(name: String) {
     def vdf =
-      ByteVector(Files.readAllBytes(Paths.get(getClass.getResource(s"/vdf/$name.vdf").toURI)))
+      ByteVector(Files.readAllBytes(Paths.get(s"condenser/shared/src/test/resources/vdf/$name.vdf")))
   }
 }
