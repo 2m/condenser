@@ -6,7 +6,7 @@ lazy val condenser =
       description := "Improve Steam efficiency by consolidating game catalogs",
       libraryDependencies ++= Seq(
         "org.scodec" %%% "scodec-core" % "1.10.3+15-82cb912a",
-        "com.lihaoyi" %%% "utest" % "0.5.3" % Test
+        "com.lihaoyi" %%% "utest" % "0.6.0" % Test
       ),
       resolvers += Resolver.sonatypeRepo("snapshots"), // shapeless native
       testFrameworks += new TestFramework("utest.runner.Framework")
@@ -23,4 +23,4 @@ lazy val root = project
   .aggregate(condenserJVM, condenserNative)
 
 scalafmtOnCompile in ThisBuild := true
-scalafmtVersion in ThisBuild := "1.2.0"
+scalafmtVersion in ThisBuild := "1.3.0"
