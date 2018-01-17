@@ -5,7 +5,7 @@ lazy val condenser =
       name := "condenser",
       description := "Improve Steam efficiency by consolidating game catalogs",
       libraryDependencies ++= Seq(
-        "org.scodec" %%% "scodec-core" % "1.10.3+15-82cb912a",
+        "org.scodec" %%% "scodec-core" % "1.10.3+15-c395ebb2",
         "com.lihaoyi" %%% "utest" % "0.6.0" % Test
       ),
       resolvers += Resolver.sonatypeRepo("snapshots"), // shapeless native
